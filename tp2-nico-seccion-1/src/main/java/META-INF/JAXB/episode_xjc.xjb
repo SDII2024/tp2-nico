@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="3.0" xmlns="https://jakarta.ee/xml/ns/jaxb">
+  <!--
+
+Este archivo ha sido generado por Eclipse Implementation of JAXB v3.0.0 
+Visite https://eclipse-ee4j.github.io/jaxb-ri 
+Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
+Generado el: 2024.04.07 a las 03:46:50 PM ART 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.webservicesoap.org/birthday">
+    <schemaBindings map="false">
+      <package name="org.webservicesoap.birthday"/>
+    </schemaBindings>
+    <bindings scd="tns:getBirthdayRequest">
+      <class ref="org.webservicesoap.birthday.GetBirthdayRequest"/>
+    </bindings>
+    <bindings scd="tns:getAgeResponse">
+      <class ref="org.webservicesoap.birthday.GetAgeResponse"/>
+    </bindings>
+  </bindings>
+</bindings>
+
