@@ -6,7 +6,7 @@
 //
 
 
-package org.webservicesoap.convertidor;
+package org.webservicesoap.login;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -24,7 +24,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="dolar" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
+ *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -35,27 +35,27 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "dolar"
+    "status"
 })
-@XmlRootElement(name = "DolarPeso")
-public class DolarPeso {
+@XmlRootElement(name = "LoginResponse")
+public class LoginResponse {
 
-    protected long dolar;
+    protected boolean status;
 
     /**
-     * Obtiene el valor de la propiedad dolar.
+     * Obtiene el valor de la propiedad status.
      * 
      */
-    public long getDolar() {
-        return dolar;
+    public boolean isStatus() {
+        return status;
     }
 
     /**
-     * Define el valor de la propiedad dolar.
+     * Define el valor de la propiedad status.
      * 
      */
-    public void setDolar(long value) {
-        this.dolar = value;
+    public void setStatus(boolean value) {
+        this.status = value;
     }
 
 }

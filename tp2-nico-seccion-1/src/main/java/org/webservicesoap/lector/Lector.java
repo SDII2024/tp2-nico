@@ -6,7 +6,7 @@
 //
 
 
-package org.webservicesoap.convertidor;
+package org.webservicesoap.lector;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -24,7 +24,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="dolar" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
+ *         &lt;element name="codigo" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -35,27 +35,27 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "dolar"
+    "codigo"
 })
-@XmlRootElement(name = "DolarPeso")
-public class DolarPeso {
+@XmlRootElement(name = "Lector")
+public class Lector {
 
-    protected long dolar;
+    protected int codigo;
 
     /**
-     * Obtiene el valor de la propiedad dolar.
+     * Obtiene el valor de la propiedad codigo.
      * 
      */
-    public long getDolar() {
-        return dolar;
+    public int getCodigo() {
+        return codigo;
     }
 
     /**
-     * Define el valor de la propiedad dolar.
+     * Define el valor de la propiedad codigo.
      * 
      */
-    public void setDolar(long value) {
-        this.dolar = value;
+    public void setCodigo(int value) {
+        this.codigo = value;
     }
 
 }

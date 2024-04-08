@@ -5,5 +5,5 @@
 // Generado el: 2024.04.07 a las 11:27:42 PM ART 
 //
 
-@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://www.webservicesoap.org/convertidor", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package org.webservicesoap.convertidor;
+@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://www.webservicesoap.org/login", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
+package org.webservicesoap.login;

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="3.0" xmlns="https://jakarta.ee/xml/ns/jaxb">
+  <!--
+
+Este archivo ha sido generado por Eclipse Implementation of JAXB v3.0.0 
+Visite https://eclipse-ee4j.github.io/jaxb-ri 
+Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
+Generado el: 2024.04.07 a las 11:25:46 PM ART 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.webservicesoap.org/convertidor">
+    <schemaBindings map="false">
+      <package name="org.webservicesoap.convertidor"/>
+    </schemaBindings>
+    <bindings scd="tns:PesoDolar">
+      <class ref="org.webservicesoap.convertidor.PesoDolar"/>
+    </bindings>
+    <bindings scd="tns:DolarPeso">
+      <class ref="org.webservicesoap.convertidor.DolarPeso"/>
+    </bindings>
+    <bindings scd="tns:PesoDolarResponse">
+      <class ref="org.webservicesoap.convertidor.PesoDolarResponse"/>
+    </bindings>
+    <bindings scd="tns:DolarPesoResponse">
+      <class ref="org.webservicesoap.convertidor.DolarPesoResponse"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.webservicesoap.org/lector">
+    <schemaBindings map="false">
+      <package name="org.webservicesoap.lector"/>
+    </schemaBindings>
+    <bindings scd="tns:Lector">
+      <class ref="org.webservicesoap.lector.Lector"/>
+    </bindings>
+    <bindings scd="tns:LectorResponse">
+      <class ref="org.webservicesoap.lector.LectorResponse"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="http://www.webservicesoap.org/login">
+    <schemaBindings map="false">
+      <package name="org.webservicesoap.login"/>
+    </schemaBindings>
+    <bindings scd="tns:Login">
+      <class ref="org.webservicesoap.login.Login"/>
+    </bindings>
+    <bindings scd="tns:LoginResponse">
+      <class ref="org.webservicesoap.login.LoginResponse"/>
+    </bindings>
+  </bindings>
+</bindings>
+
