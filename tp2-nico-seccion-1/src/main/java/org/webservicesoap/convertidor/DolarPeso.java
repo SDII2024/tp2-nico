@@ -6,7 +6,7 @@
 //
 
 
-package org.webservicesoap.birthday;
+package org.webservicesoap.convertidor;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
@@ -24,7 +24,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="age" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="dolar" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -35,27 +35,27 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "age"
+    "dolar"
 })
-@XmlRootElement(name = "getAgeResponse")
-public class GetAgeResponse {
+@XmlRootElement(name = "DolarPeso")
+public class DolarPeso {
 
-    protected int age;
+    protected long dolar;
 
     /**
-     * Obtiene el valor de la propiedad age.
+     * Obtiene el valor de la propiedad dolar.
      * 
      */
-    public int getAge() {
-        return age;
+    public long getDolar() {
+        return dolar;
     }
 
     /**
-     * Define el valor de la propiedad age.
+     * Define el valor de la propiedad dolar.
      * 
      */
-    public void setAge(int value) {
-        this.age = value;
+    public void setDolar(long value) {
+        this.dolar = value;
     }
 
 }

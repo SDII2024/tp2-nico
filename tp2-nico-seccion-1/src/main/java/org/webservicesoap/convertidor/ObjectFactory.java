@@ -6,7 +6,7 @@
 //
 
 
-package org.webservicesoap.birthday;
+package org.webservicesoap.convertidor;
 
 import jakarta.xml.bind.annotation.XmlRegistry;
 
@@ -14,7 +14,7 @@ import jakarta.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the org.webservicesoap.birthday package. 
+ * generated in the org.webservicesoap.convertidor package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -30,26 +30,42 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.webservicesoap.birthday
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.webservicesoap.convertidor
      * 
      */
     public ObjectFactory() {
     }
 
     /**
-     * Create an instance of {@link GetBirthdayRequest }
+     * Create an instance of {@link PesoDolar }
      * 
      */
-    public GetBirthdayRequest createGetBirthdayRequest() {
-        return new GetBirthdayRequest();
+    public PesoDolar createPesoDolar() {
+        return new PesoDolar();
     }
 
     /**
-     * Create an instance of {@link GetAgeResponse }
+     * Create an instance of {@link DolarPeso }
      * 
      */
-    public GetAgeResponse createGetAgeResponse() {
-        return new GetAgeResponse();
+    public DolarPeso createDolarPeso() {
+        return new DolarPeso();
+    }
+
+    /**
+     * Create an instance of {@link PesoDolarResponse }
+     * 
+     */
+    public PesoDolarResponse createPesoDolarResponse() {
+        return new PesoDolarResponse();
+    }
+
+    /**
+     * Create an instance of {@link DolarPesoResponse }
+     * 
+     */
+    public DolarPesoResponse createDolarPesoResponse() {
+        return new DolarPesoResponse();
     }
 
 }
