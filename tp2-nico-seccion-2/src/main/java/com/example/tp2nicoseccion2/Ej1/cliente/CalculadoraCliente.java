@@ -1,6 +1,6 @@
 package com.example.tp2nicoseccion2.Ej1.cliente;
 
-import org.tp2.seccion2.ejercicio1.calculadora.*;
+import com.example.tp2nicoseccion2.Ej1.calculadora.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,66 +10,63 @@ import org.springframework.ws.soap.client.core.SoapActionCallback;
 
 public class CalculadoraCliente extends WebServiceGatewaySupport{
 
+    private static final String URL = "http://www.dneonline.com/calculator.asmx";
+
     private static final Logger log = LoggerFactory.getLogger(CalculadoraCliente.class);
 
-    public AddResponse sumar(int nro1, int nro2) {
+    public AddResponse sumar(int a, int b) {
         Add request = new Add();
+        request.setIntA(a);
+        request.setIntB(b);
 
-        request.setIntA(nro1);
-        request.setIntB(nro2);
+        log.info("Invocando servicio de suma");
 
-        log.info("Suma para: nro1=" + nro1 + " y nro2=" + nro2);
+        String soapAction = "http://tempuri.org/Add";
 
-        AddResponse response = (AddResponse) getWebServiceTemplate()
-                .marshalSendAndReceive("http://www.dneonline.com/calculator.asmx", request,
-                        new SoapActionCallback(
-                                "http://tempuri.org/Add"));
-
-        return response;
+        return (AddResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(URL, request,
+                        new SoapActionCallback(soapAction));
     }
-    public SubtractResponse restar(int nro1, int nro2) {
+
+    public SubtractResponse restar(int a, int b) {
         Subtract request = new Subtract();
+        request.setIntA(a);
+        request.setIntB(b);
 
-        request.setIntA(nro1);
-        request.setIntB(nro2);
+        log.info("Invocando servicio de resta");
 
-        log.info("Resta para: nro1=" + nro1 + " y nro2=" + nro2);
+        String soapAction = "http://tempuri.org/Subtract";
 
-        SubtractResponse response = (SubtractResponse) getWebServiceTemplate()
-                .marshalSendAndReceive("http://www.dneonline.com/calculator.asmx", request,
-                        new SoapActionCallback(
-                                "http://tempuri.org/Subtract"));
-
-        return response;
+        return (SubtractResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(URL, request,
+                        new SoapActionCallback(soapAction));
     }
-    public MultiplyResponse multiplicar(int nro1, int nro2) {
+
+    public MultiplyResponse multiplicar(int a, int b) {
         Multiply request = new Multiply();
+        request.setIntA(a);
+        request.setIntB(b);
 
-        request.setIntA(nro1);
-        request.setIntB(nro2);
+        log.info("Invocando servicio de multiplicacion");
 
-        log.info("Multiplicacion para: nro1=" + nro1 + " y nro2=" + nro2);
+        String soapAction = "http://tempuri.org/Multiply";
 
-        MultiplyResponse response = (MultiplyResponse) getWebServiceTemplate()
-                .marshalSendAndReceive("http://www.dneonline.com/calculator.asmx", request,
-                        new SoapActionCallback(
-                                "http://tempuri.org/Multiply"));
-
-        return response;
+        return (MultiplyResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(URL, request,
+                        new SoapActionCallback(soapAction));
     }
-    public DivideResponse dividir(int nro1, int nro2) {
+
+    public DivideResponse dividir(int a, int b) {
         Divide request = new Divide();
+        request.setIntA(a);
+        request.setIntB(b);
 
-        request.setIntA(nro1);
-        request.setIntB(nro2);
+        log.info("Invocando servicio de division");
 
-        log.info("Divicion para: nro1=" + nro1 + " y nro2=" + nro2);
+        String soapAction = "http://tempuri.org/Divide";
 
-        DivideResponse response = (DivideResponse) getWebServiceTemplate()
-                .marshalSendAndReceive("http://www.dneonline.com/calculator.asmx", request,
-                        new SoapActionCallback(
-                                "http://tempuri.org/Divide"));
-
-        return response;
+        return (DivideResponse) getWebServiceTemplate()
+                .marshalSendAndReceive(URL, request,
+                        new SoapActionCallback(soapAction));
     }
 }

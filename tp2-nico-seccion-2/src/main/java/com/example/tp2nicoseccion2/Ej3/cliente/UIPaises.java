@@ -1,33 +1,32 @@
-package com.example.tp2nicoseccion2.Ej1.cliente;
-import javax.swing.*;
+package com.example.tp2nicoseccion2.Ej3.cliente;
 
+
+import com.example.tp2nicoseccion2.Ej3.paises.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.example.tp2nicoseccion2.Ej1.calculadora.AddResponse;
-import com.example.tp2nicoseccion2.Ej1.calculadora.DivideResponse;
-import com.example.tp2nicoseccion2.Ej1.calculadora.MultiplyResponse;
-import com.example.tp2nicoseccion2.Ej1.calculadora.SubtractResponse;
 
-import static java.lang.Integer.parseInt;
+import javax.swing.*;
+
+
 @Component
-public class UICalculadora {
-    static Logger logger = LogManager.getLogger(UICalculadora.class);
-    private final CalculadoraCliente clienteCalculadora;
+public class UIPaises {
+    static Logger logger = LogManager.getLogger(UIPaises.class);
+    private final ClientePaises clientePaises;
     private JTextField inputA;
-    private JTextField inputB;
     private ButtonGroup btnOperadores;
     private JLabel labelResultado;
 
     @Autowired
-    public UICalculadora(CalculadoraCliente clienteCalculadora) {
-        this.clienteCalculadora = clienteCalculadora;
+    public UIPaises(ClientePaises clientePaises) {
+        this.clientePaises = clientePaises;
     }
+
 
     public void crearVentana() {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Calculadora");
+            JFrame frame = new JFrame("Convertidor Temperatura");
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
             iniciarComponentes(frame);
@@ -38,23 +37,21 @@ public class UICalculadora {
     }
 
     private void iniciarComponentes(JFrame frame) {
-        JLabel labelA = new JLabel("Numero A:");
-        JLabel labelB = new JLabel("Numero B:");
+        JLabel labelA = new JLabel("Codigo Pais:");
         labelResultado = new JLabel("  ", SwingConstants.LEFT);
         inputA = new JTextField();
-        inputB = new JTextField();
-        JButton btnCalcular = new JButton("Calcular");
+        JButton btnConsultar = new JButton("Consultar");
 
         Box boxOperadores = Box.createHorizontalBox();
         btnOperadores = new ButtonGroup();
-        for (String operador : new String[]{"+", "-", "*", "/"}) {
+        for (String operador : new String[]{"Lista Paises","Capital","Moneda","Codigo Telefono", "Bandera"}) {
             JToggleButton btnOperador = new JToggleButton(operador);
             btnOperador.setActionCommand(operador);
             boxOperadores.add(btnOperador);
             btnOperadores.add(btnOperador);
         }
 
-        btnCalcular.addActionListener(e -> calcularResultado());
+        btnConsultar.addActionListener(e -> resultado());
 
         JPanel panel = new JPanel();
         GroupLayout layout = new GroupLayout(panel);
@@ -65,64 +62,62 @@ public class UICalculadora {
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addComponent(labelA)
                 .addComponent(inputA)
-                .addComponent(labelB)
-                .addComponent(inputB)
                 .addComponent(boxOperadores)
-                .addComponent(btnCalcular)
+                .addComponent(btnConsultar)
                 .addComponent(labelResultado));
 
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addComponent(labelA)
                 .addComponent(inputA)
-                .addComponent(labelB)
-                .addComponent(inputB)
                 .addComponent(boxOperadores)
-                .addComponent(btnCalcular)
+                .addComponent(btnConsultar)
                 .addComponent(labelResultado));
 
         frame.add(panel);
     }
 
-    private void calcularResultado() {
+    private void resultado() {
         try {
-            String num1 = inputA.getText();
-            String num2 = inputB.getText();
+            String cod = inputA.getText();
 
-            if (num1.isEmpty() || num2.isEmpty()) {
-                labelResultado.setText("Ingrese ambos valores");
+            if (cod.isEmpty()) {
+                labelResultado.setText("Ingrese el codigo");
                 return;
             }
 
-            int op1 = parseInt(num1);
-            int op2 = parseInt(num2);
-
             String oper = btnOperadores.getSelection().getActionCommand();
 
-            int resultado;
+            String resultado;
             switch (oper) {
-                case "+" -> {
-                    AddResponse responseSumar = clienteCalculadora.sumar(op1,op2);
-                    resultado = responseSumar.getAddResult();
+                case "Lista Paises" -> {
+                    ListOfCountryNamesByNameResponse responseListCountry = clientePaises.paisesPorNombre();
+                    labelResultado.setText("Resultado: " + responseListCountry.getListOfCountryNamesByNameResult());
                 }
-                case "-" -> {
-                    SubtractResponse responseRestar = clienteCalculadora.restar(op1,op2);
-                    resultado = responseRestar.getSubtractResult();
+                case "Capital" -> {
+                    CapitalCityResponse responseCapital = clientePaises.capital(cod);
+                    resultado = responseCapital.getCapitalCityResult();
+                    labelResultado.setText("Resultado: " + resultado);
                 }
-                case "*" -> {
-                    MultiplyResponse responseMultiplicar = clienteCalculadora.multiplicar(op1,op2);
-                    resultado = responseMultiplicar.getMultiplyResult();
+                case "Moneda" -> {
+                    CountryCurrencyResponse responseCurrencey = clientePaises.moneda(cod);
+                    resultado = String.valueOf(responseCurrencey.getCountryCurrencyResult());
+                    labelResultado.setText("Resultado: " + resultado);
                 }
-                case "/" -> {
-                    DivideResponse responseDividir = clienteCalculadora.dividir(op1,op2);
-                    resultado = responseDividir.getDivideResult();
+                case "Codigo Telefono" -> {
+                    CountryIntPhoneCodeResponse responseCodePhone = clientePaises.codigoTelefono(cod);
+                    resultado = responseCodePhone.getCountryIntPhoneCodeResult();
+                    labelResultado.setText("Resultado: " + resultado);
+                }
+                case "Bandera" -> {
+                    CountryFlagResponse responseFlag = clientePaises.bandera(cod);
+                    resultado = responseFlag.getCountryFlagResult();
+                    labelResultado.setText("Resultado: " + resultado);
                 }
                 default -> {
                     labelResultado.setText("Operador no valido");
                     return;
                 }
             }
-
-            labelResultado.setText("Resultado: " + resultado);
         } catch (NumberFormatException ex) {
             labelResultado.setText("Los valores deben ser numeros");
         } catch (RuntimeException ex) {

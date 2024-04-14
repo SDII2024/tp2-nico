@@ -1,33 +1,32 @@
-package com.example.tp2nicoseccion2.Ej1.cliente;
-import javax.swing.*;
+package com.example.tp2nicoseccion2.Ej2.cliente;
 
+import com.example.tp2nicoseccion2.Ej2.temperatura.CelsiusToFahrenheitResponse;
+import com.example.tp2nicoseccion2.Ej2.temperatura.FahrenheitToCelsiusResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.example.tp2nicoseccion2.Ej1.calculadora.AddResponse;
-import com.example.tp2nicoseccion2.Ej1.calculadora.DivideResponse;
-import com.example.tp2nicoseccion2.Ej1.calculadora.MultiplyResponse;
-import com.example.tp2nicoseccion2.Ej1.calculadora.SubtractResponse;
 
-import static java.lang.Integer.parseInt;
+import javax.swing.*;
+
+
 @Component
-public class UICalculadora {
-    static Logger logger = LogManager.getLogger(UICalculadora.class);
-    private final CalculadoraCliente clienteCalculadora;
+public class UITemperatura {
+    static Logger logger = LogManager.getLogger(UITemperatura.class);
+    private final ClienteTemperatura clienteTemperatura;
     private JTextField inputA;
-    private JTextField inputB;
     private ButtonGroup btnOperadores;
     private JLabel labelResultado;
 
     @Autowired
-    public UICalculadora(CalculadoraCliente clienteCalculadora) {
-        this.clienteCalculadora = clienteCalculadora;
+    public UITemperatura(ClienteTemperatura clienteTemperatura) {
+        this.clienteTemperatura = clienteTemperatura;
     }
+
 
     public void crearVentana() {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Calculadora");
+            JFrame frame = new JFrame("Convertidor Temperatura");
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
             iniciarComponentes(frame);
@@ -38,23 +37,21 @@ public class UICalculadora {
     }
 
     private void iniciarComponentes(JFrame frame) {
-        JLabel labelA = new JLabel("Numero A:");
-        JLabel labelB = new JLabel("Numero B:");
+        JLabel labelA = new JLabel("Temperatura:");
         labelResultado = new JLabel("  ", SwingConstants.LEFT);
         inputA = new JTextField();
-        inputB = new JTextField();
-        JButton btnCalcular = new JButton("Calcular");
+        JButton btnConvertir = new JButton("Convertir");
 
         Box boxOperadores = Box.createHorizontalBox();
         btnOperadores = new ButtonGroup();
-        for (String operador : new String[]{"+", "-", "*", "/"}) {
+        for (String operador : new String[]{"A Celcius", "A Fahrenheit"}) {
             JToggleButton btnOperador = new JToggleButton(operador);
             btnOperador.setActionCommand(operador);
             boxOperadores.add(btnOperador);
             btnOperadores.add(btnOperador);
         }
 
-        btnCalcular.addActionListener(e -> calcularResultado());
+        btnConvertir.addActionListener(e -> convertir());
 
         JPanel panel = new JPanel();
         GroupLayout layout = new GroupLayout(panel);
@@ -65,56 +62,40 @@ public class UICalculadora {
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addComponent(labelA)
                 .addComponent(inputA)
-                .addComponent(labelB)
-                .addComponent(inputB)
                 .addComponent(boxOperadores)
-                .addComponent(btnCalcular)
+                .addComponent(btnConvertir)
                 .addComponent(labelResultado));
 
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addComponent(labelA)
                 .addComponent(inputA)
-                .addComponent(labelB)
-                .addComponent(inputB)
                 .addComponent(boxOperadores)
-                .addComponent(btnCalcular)
+                .addComponent(btnConvertir)
                 .addComponent(labelResultado));
 
         frame.add(panel);
     }
 
-    private void calcularResultado() {
+    private void convertir() {
         try {
-            String num1 = inputA.getText();
-            String num2 = inputB.getText();
+            String temp = inputA.getText();
 
-            if (num1.isEmpty() || num2.isEmpty()) {
-                labelResultado.setText("Ingrese ambos valores");
+            if (temp.isEmpty()) {
+                labelResultado.setText("Ingrese el valor");
                 return;
             }
 
-            int op1 = parseInt(num1);
-            int op2 = parseInt(num2);
-
             String oper = btnOperadores.getSelection().getActionCommand();
 
-            int resultado;
+            String resultado;
             switch (oper) {
-                case "+" -> {
-                    AddResponse responseSumar = clienteCalculadora.sumar(op1,op2);
-                    resultado = responseSumar.getAddResult();
+                case "A Celcius" -> {
+                    FahrenheitToCelsiusResponse responseFtoC = clienteTemperatura.getCelsius(temp);
+                    resultado = responseFtoC.getFahrenheitToCelsiusResult();
                 }
-                case "-" -> {
-                    SubtractResponse responseRestar = clienteCalculadora.restar(op1,op2);
-                    resultado = responseRestar.getSubtractResult();
-                }
-                case "*" -> {
-                    MultiplyResponse responseMultiplicar = clienteCalculadora.multiplicar(op1,op2);
-                    resultado = responseMultiplicar.getMultiplyResult();
-                }
-                case "/" -> {
-                    DivideResponse responseDividir = clienteCalculadora.dividir(op1,op2);
-                    resultado = responseDividir.getDivideResult();
+                case "A Fahrenheit" -> {
+                    CelsiusToFahrenheitResponse responseCtoF = clienteTemperatura.getFahrenheit(temp);
+                    resultado = responseCtoF.getCelsiusToFahrenheitResult();
                 }
                 default -> {
                     labelResultado.setText("Operador no valido");
