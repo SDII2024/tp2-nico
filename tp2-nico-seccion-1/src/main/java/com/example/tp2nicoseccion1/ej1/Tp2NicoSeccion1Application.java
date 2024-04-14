@@ -1,4 +1,4 @@
-package com.example.tp2nicoseccion1;
+package com.example.tp2nicoseccion1.ej1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
